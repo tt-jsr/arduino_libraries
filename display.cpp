@@ -31,15 +31,15 @@ namespace display_ns
 
     void prePrintFlags(int flags, int x, int y)
     {
-        if (flags & FLAG_CLEAR)
+        if (flags & DISPLAY_CLEAR)
             display.clearDisplay();
-        if (flags & FLAG_SMALL_FONT)
+        if (flags & DISPLAY_SMALL_FONT)
             setSmallFont();
-        if (flags & FLAG_LARGE_FONT)
+        if (flags & DISPLAY_LARGE_FONT)
             setLargeFont();
 
 
-        if (flags & FLAG_LINES)
+        if (flags & DISPLAY_LINES)
         {
             if (x < 0)
                 x = display.getCursorX();
@@ -61,7 +61,7 @@ namespace display_ns
 
     void postPrintFlags(int flags)
     {
-        if (flags & FLAG_DISPLAY)
+        if (flags & DISPLAY_DISPLAY)
             display_ns::display.display();
     }
 

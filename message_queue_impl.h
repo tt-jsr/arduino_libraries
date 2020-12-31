@@ -16,16 +16,22 @@ struct Timer
 };
 
 #define PIN_PIN_MASK        0x00ff
-#define PIN_DIGITAL_MASK    0x8000
+#define PIN_DIGITAL_BIT     0x1000  // digital/analog
+#define PIN_ENABLED_BIT     0x2000
 
 #define PIN_PIN(p)           (p.flags & PIN_PIN_MASK)
 #define PIN_SET_PIN(p, v)    (p.flags |= v )
-#define PIN_IS_DIGITAL(p)    ((p.flags & PIN_DIGITAL_MASK) == PIN_DIGITAL_MASK)
-#define PIN_SET_DIGITAL(p)   (p.flags |= PIN_DIGITAL_MASK)
-#define PIN_UNSET_DIGITAL(p) (p.flags &= ~PIN_DIGITAL_MASK)
+
+#define PIN_IS_DIGITAL(p)    ((p.flags & PIN_DIGITAL_BIT) == PIN_DIGITAL_BIT)
+#define PIN_SET_DIGITAL(p)   (p.flags |= PIN_DIGITAL_BIT)
+#define PIN_UNSET_DIGITAL(p) (p.flags &= ~PIN_DIGITAL_BIT)
+
+#define PIN_IS_ENABLED(p)    ((p.flags & PIN_ENABLED_BIT) == PIN_ENABLED_BIT)
+#define PIN_SET_ENABLED(p)   (p.flags |= PIN_ENABLED_BIT)
+#define PIN_UNSET_ENABLED(p) (p.flags &= ~PIN_ENABLED_BIT)
 struct Pin
 {
-    int flags;  // contains the pin id, and digital/analog flag
+    int flags;  // contains the pin id, enabled flag, and digital/analog flag
     int debounceValue;
     unsigned long  debounceTime;  
     unsigned long  triggerComplete;    

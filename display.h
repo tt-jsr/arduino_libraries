@@ -16,11 +16,11 @@ namespace display_ns
     extern Adafruit_SSD1306 display;
     extern int TEXT_HEIGHT; // Height of current font
 
-    static const int FLAG_CLEAR = 0x01;         // Clear the display
-    static const int FLAG_SMALL_FONT = 0x02;    // Use small font
-    static const int FLAG_LARGE_FONT = 0x04;    // use large font
-    static const int FLAG_DISPLAY = 0x08;       // Write to screen
-    static const int FLAG_LINES = 0x10;         // y-coordinate is in lines
+    static const int DISPLAY_CLEAR = 0x01;         // Clear the display
+    static const int DISPLAY_SMALL_FONT = 0x02;    // Use small font
+    static const int DISPLAY_LARGE_FONT = 0x04;    // use large font
+    static const int DISPLAY_DISPLAY = 0x08;       // Write to screen
+    static const int DISPLAY_LINES = 0x10;         // y-coordinate is in lines
 
     // Write a message to the screen
     // if x or y < 0, use the current position

@@ -311,6 +311,7 @@ bool MessageQueue::digitalRead(int id, int pin, int def, unsigned long debounceT
     }
     PIN_SET_PIN(pins_[id], pin);
     PIN_SET_DIGITAL(pins_[id]);
+    PIN_SET_ENABLED(pins_[id]);
     pins_[id].debounceTime = debounceTimeMicros;
     pins_[id].triggerComplete = 0;
     pinMode(pin, INPUT);
@@ -336,6 +337,7 @@ bool MessageQueue::analogRead(int id, int pin, unsigned long timeMicros)
     }
     PIN_SET_PIN(pins_[id], pin);
     PIN_UNSET_DIGITAL(pins_[id]);
+    PIN_SET_ENABLED(pins_[id]);
     pins_[id].debounceTime = timeMicros;
     pins_[id].triggerComplete = 0;
     if (debug_)
@@ -363,10 +365,13 @@ void MessageQueue::check_pins()
     }
     for (int id = 0; id < MAX_PINS; id++)
     {
-        if (PIN_IS_DIGITAL(pins_[id]))
-            digital_check(id);
-        else
-            analog_check(id);
+        if (PIN_IS_ENABLED(pins_[id]))
+        {
+            if (PIN_IS_DIGITAL(pins_[id]))
+                digital_check(id);
+            else
+                analog_check(id);
+        }
     }
 }
 
